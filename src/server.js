@@ -1,7 +1,9 @@
-import express, { Request, Response, NextFunction } from "express";
-import { router } from "./router";
+import pkg from "express";
+import express from "express";
+import { router } from "./router.js";
 import cors from "cors";
 
+const { Request, Response, NextFunction } = pkg;
 const app = express();
 
 app.use(cors());

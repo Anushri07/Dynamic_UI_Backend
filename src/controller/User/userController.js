@@ -1,10 +1,12 @@
-import { Request, Response, NextFunction } from "express";
+import pkg from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { userRepository } from "../../repositories/user/UserRepository";
-import { ApiError } from "../../utils/ApiError";
-import { ApiResponse } from "../../utils/ApiResponse";
-import { configurations } from "../../config/configurations";
+// import { userRepository } from "../../repositories/user/UserRepository";
+// import { ApiError } from "../../utils/ApiError";
+// import { ApiResponse } from "../../utils/ApiResponse";
+// import { configurations } from "../../config/configurations";
+
+const { Request, Response, NextFunction } =pkg;
 
 class UserController {
 //   getAllUsers = async (

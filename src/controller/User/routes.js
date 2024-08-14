@@ -1,31 +1,35 @@
 import { Router } from "express";
-import user from "./UserController";
-import { userValidation } from "./validation";
-import { validationHandler, authMiddleware } from "../../lib";
+import user from "./userController.js";
+// import { userValidation } from "./validation";
+// import { validationHandler, authMiddleware } from "../../lib";
 
 const userRouter = Router();
 
-userRouter.post("/login", validationHandler(userValidation.login), user.login);
+// userRouter.post("/login", validationHandler(userValidation.login), user.login);
 
-userRouter.get("/profile", authMiddleware, user.profile);
+// userRouter.get("/profile", authMiddleware, user.profile);
 
-userRouter.get("/", authMiddleware, user.getAllUsers);
+// userRouter.get("/", authMiddleware, user.getAllUsers);
 
-userRouter.get("/:originalId", authMiddleware, user.getUserById);
+// userRouter.get("/:originalId", authMiddleware, user.getUserById);
 
-userRouter.post(
-  "/",
-  validationHandler(userValidation.create),
-  user.registerUser
-);
+// userRouter.post(
+//   "/",
+//   // validationHandler(userValidation.create),
+//   user.registerUser
+// );
 
-userRouter.put(
-  "/:originalId",
-  authMiddleware,
-  validationHandler(userValidation.update),
-  user.updateUser
-);
+// userRouter.put(
+//   "/:originalId",
+//   authMiddleware,
+//   validationHandler(userValidation.update),
+//   user.updateUser
+// );
 
-userRouter.delete("/:originalId", user.deleteUser);
+userRouter.get('/health-check', (req, res) => {
+  res.send('health check is here');
+})
+
+// userRouter.delete("/:originalId", user.deleteUser);
 
 export default userRouter;
