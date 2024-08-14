@@ -2,10 +2,11 @@ import pkg from "express";
 import express from "express";
 import { router } from "./router.js";
 import cors from "cors";
+import bodyParser from "body-parser";
 
 const { Request, Response, NextFunction } = pkg;
 const app = express();
-
+app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
 app.use("/api", router);

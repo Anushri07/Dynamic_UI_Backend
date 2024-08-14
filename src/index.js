@@ -1,8 +1,15 @@
+import {Database} from "./lib/database.js";
 import { app } from "./server.js";
-// import express, { Request, Response, NextFunction } from "express";
 const PORT = 9000;
-// const app = express();
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+const MONGO_URL = "mongodb://localhost:27017/test" 
+
+Database.open(MONGO_URL)
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log("Server is running on port ",PORT);
+    });
+  })
+  .catch((error) => {
+    console.log("MongoDB Connection Failed!! : ", error);
+  });
+
