@@ -1,57 +1,25 @@
 import { Router } from "express";
-import mongoose from "mongoose";
+import UserController from './UserController.js';
+const userRoute = Router();
 
-const userRouter = Router();
-
-// userRouter.post("/login", validationHandler(userValidation.login), user.login);
-
-// userRouter.get("/profile", authMiddleware, user.profile);
-
-// userRouter.get("/", authMiddleware, user.getAllUsers);
-
-// userRouter.get("/:originalId", authMiddleware, user.getUserById);
-
-// userRouter.post(
-//   "/",
-//   // validationHandler(userValidation.create),
-//   user.registerUser
-// );
-
-// userRouter.put(
-//   "/:originalId",
-//   authMiddleware,
-//   validationHandler(userValidation.update),
-//   user.updateUser
-// );
-
-userRouter.get('/health-check', (req, res) => {
-  res.send('health check is here');
-})
-
-const formSchema = new mongoose.Schema({
-  formFields: {
-    type: [{
-      Field:{type:String, required:true},
-      Type:{type:String, required:true},
-      Size:{type:Number, required:true},
-      Isrequired:{type:Boolean, required:true}
-    }],
-    required: true
-  }
+userRoute.post('/create', async (req, res) => {
+  return UserController.createUser(req, res);
 });
 
-const Form = mongoose.model('Form', formSchema);
+userRoute.get('/getAll', async (req, res) => {
+  return UserController.getAllUser(req, res);
+});
 
-userRouter.post('/upload-json',async(req, res) => {
-  console.log(req.body,"?????");
-  const formfields = req.body;
-  console.log(formfields,'Form field Successfully');
-  const form = new Form({ formfields });
-    await form.save();
-  res.send('health check is here');
-})
+userRoute.delete('/delete/:id', async (req, res) => {
+  return UserController.deleteUser(req, res);
+});
 
+userRoute.get('/:id', async (req, res) => {
+  return UserController.getUser(req, res);
+});
 
-// userRouter.delete("/:originalId", user.deleteUser);
+userRoute.put('/edit/:id', async (req, res) => {
+  return UserController.editUser(req, res);
+});
 
-export default userRouter;
+export default userRoute;
